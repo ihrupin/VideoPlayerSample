@@ -22,7 +22,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
-                                    <segue destination="wgm-kZ-ioI" kind="show" id="6Ca-dL-i6R"/>
+                                    <action selector="onClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cl8-SK-NMj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -33,22 +33,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="20" y="84"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ye2-Z7-ye2">
-            <objects>
-                <viewController id="wgm-kZ-ioI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GOD-Gm-Dux">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="MyU-xM-Khh"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bEm-TE-Dnl"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jGr-3R-tCh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="812" y="84"/>
         </scene>
     </scenes>
     <resources>
