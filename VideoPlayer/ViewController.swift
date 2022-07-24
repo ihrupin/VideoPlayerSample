@@ -13,32 +13,13 @@ class ViewController: UIViewController, AVPlayerViewControllerDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     let cellReuseIdentifier = "ListItem"
-    var thumbnails: [String: UIImage] = [:]
     
     var videoPlayer: AVPlayerViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        cacheVideoThumbnails()
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-    }
-    
-    func cacheVideoThumbnails() {
-        DispatchQueue(label: "thumbsDownload").async { [self] in
-           for urlString in VideoUrls.allCases{
-               guard let url = URL.init(string: urlString.rawValue) else {
-                               return
-                           }
-               if let thumbnailImage = self.getThumbnailImage(forUrl: url) {
-                   self.thumbnails[urlString.rawValue] = thumbnailImage
-               }
-               DispatchQueue.main.async {
-                   self.tableView.reloadData()
-               }
-           }
-       }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,12 +34,19 @@ class ViewController: UIViewController, AVPlayerViewControllerDelegate, UITableV
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? ListItem else { return  UITableViewCell() }
         
         cell.title.text = VideoTitles.allCases[indexPath.row].rawValue
-        let thumbnail = thumbnails[VideoUrls.allCases[indexPath.row].rawValue]
-        if (thumbnail == nil) {
-            cell.thumbnail.image = UIImage.gifImageWithName("loading")
-        } else {
-            cell.thumbnail.image = thumbnail
-        }
+        
+        let urlString = VideoUrls.allCases[indexPath.row].rawValue
+        cell.thumbnail.image = UIImage.gifImageWithName("loading")
+        DispatchQueue(label: urlString).async { [self] in
+           guard let url = URL.init(string: urlString) else {
+                           return
+                       }
+           if let thumbnailImage = self.getThumbnailImage(forUrl: url) {
+               DispatchQueue.main.async {
+                   cell.thumbnail.image = thumbnailImage
+               }
+           }
+       }
              
             return cell
         }
