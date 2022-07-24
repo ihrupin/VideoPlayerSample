@@ -9,19 +9,46 @@ import UIKit
 import AVKit
 import UIKit
 
-class ViewController: UIViewController, AVPlayerViewControllerDelegate {
+class ViewController: UIViewController, AVPlayerViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
+    let cellReuseIdentifier = "ListItem"
     
     var videoPlayer: AVPlayerViewController!
-    
-    @IBOutlet weak var image: UIImageView!
-    let url = URL(string: "https://archive.org/download/Flickr-4876582888/Yellowstone_Geyser-4876582888.mp4")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let thumbnailImage = getThumbnailImage(forUrl: self.url!) {
-            image.image = thumbnailImage
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? ListItem else { return  UITableViewCell() }
+        
+        cell.title.text = VideoTitles.allCases[indexPath.row].rawValue
+        
+        
+        guard let url = URL.init(string: VideoUrls.allCases[indexPath.row].rawValue) else {
+                        return cell
+                    }
+        if let thumbnailImage = getThumbnailImage(forUrl: url) {
+            cell.thumbnail.image = thumbnailImage
         }
+             
+            return cell
+        }
+        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return VideoUrls.allCases.count
     }
     
     func playVideo(forUrl url: URL) {
@@ -41,7 +68,7 @@ class ViewController: UIViewController, AVPlayerViewControllerDelegate {
         let imageGenerator = AVAssetImageGenerator(asset: asset)
 
         do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 25, timescale: 60), actualTime: nil)
             return UIImage(cgImage: thumbnailImage)
         } catch let error {
             print(error)
