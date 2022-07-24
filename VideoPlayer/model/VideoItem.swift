@@ -18,15 +18,15 @@ class VideoItem {
 }
 
 enum VideoUrls: String, CaseIterable {
-    case fish = "https://archive.org/download/fishisfish_20170601/fishisfish_20170601.mp4"
-    case yellowstone = "https://archive.org/download/Flickr-4876582888/Yellowstone_Geyser-4876582888.mp4"
-    case yosemite = "https://archive.org/download/YosemiteWonders/YosemiteWonders_512kb.mp4"
-    case tahoelake = "https://archive.org/download/Flickr-32047076422/Lake_Tahoe-32047076422.mp4"
+    case vid1 = "https://archive.org/download/popeye_shuteye_popeye/popeye_shuteye_popeye_512kb.mp4"
+    case vid2 = "https://archive.org/download/popeye_i_dont_scare/popeye_i_dont_scare_512kb.mp4"
+    case vid3 = "https://archive.org/download/Jolly_Fish_1932/Tom_and_Jerry_Jolly_Fish_1932_512kb.mp4"
+    case vid4 = "https://archive.org/download/popeye_fright_to_the_finish/popeye_fright_to_the_finish_512kb.mp4"
 }
 
 enum VideoTitles: String, CaseIterable {
-    case fish = "Fish Is Fish"
-    case yellowstone = "Yellowstone Geyser"
-    case yosemite = "Yosemite Wonders"
-    case tahoelake = "Lake Tahoe"
+    case vid1 = "Shuteye Popeye"
+    case vid2 = "Popeye: I Don't Scare"
+    case vid3 = "Tom and Jerry: Jolly Fish"
+    case vid4 = "Popeye: Fright To The Finish"
 }

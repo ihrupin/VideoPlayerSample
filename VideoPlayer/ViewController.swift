@@ -68,7 +68,7 @@ class ViewController: UIViewController, AVPlayerViewControllerDelegate, UITableV
         let imageGenerator = AVAssetImageGenerator(asset: asset)
 
         do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 25, timescale: 60), actualTime: nil)
+            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 40, timescale: 1), actualTime: nil)
             return UIImage(cgImage: thumbnailImage)
         } catch let error {
             print(error)
