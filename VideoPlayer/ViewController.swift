@@ -84,6 +84,14 @@ class ViewController: UIViewController, AVPlayerViewControllerDelegate, UITableV
     func playerViewControllerDidStartPictureInPicture(_ playerViewController: AVPlayerViewController) {
         print("Video did started Picture In Picture")
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let url = URL.init(string: VideoUrls.allCases[indexPath.row].rawValue) else {
+                        return
+                    }
+        
+        playVideo(forUrl: url)
+    }
 
 
 }
